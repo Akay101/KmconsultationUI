@@ -1,323 +1,253 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <title>Krishna Medicose | Pharmacy Consultation</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<head>
+  <meta charset="UTF-8" />
+  <title>Krishna Medicose | Pharmacy Consultation</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
-      rel="stylesheet"
-    />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
-    <style>
-      :root {
-        --primary: #20504e;
-        --muted: #94a3b8;
-        --success: #16a34a;
-        --danger: #dc2626;
-      }
+  <style>
+    :root {
+      --bg:#020617;
+      --card:#0f172a;
+      --primary:#6366f1;
+      --secondary:#22d3ee;
+      --text:#e5e7eb;
+      --muted:#9ca3af;
+      --danger:#ef4444;
+      --success:#22c55e;
+    }
 
-      * {
-        box-sizing: border-box;
-        font-family: Inter, sans-serif;
-      }
-      body {
-        margin: 0;
-        background: linear-gradient(135deg, #f8fffe, #eef7f6);
-      }
-      .container {
-        max-width: 980px;
-        margin: auto;
-        padding: 40px 16px;
-      }
-      .card {
-        background: #fff;
-        border-radius: 18px;
-        padding: 28px;
-        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.08);
-      }
-      h1 {
-        color: var(--primary);
-      }
-      label {
-        font-size: 13px;
-        font-weight: 600;
-        display: block;
-        margin-bottom: 6px;
-      }
-      input,
-      textarea {
-        width: 100%;
-        padding: 12px 14px;
-        border-radius: 10px;
-        border: 1px solid #d1d5db;
-        font-size: 14px;
-      }
-      textarea {
-        min-height: 90px;
-      }
-      .grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-        gap: 18px;
-      }
-      .slots {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 10px;
-        margin-top: 10px;
-      }
-      .slot {
-        padding: 10px 14px;
-        border-radius: 999px;
-        border: 1px solid #cbd5e1;
-        cursor: pointer;
-        font-size: 13px;
-      }
-      .slot.active {
-        background: var(--primary);
-        color: white;
-      }
-      .slot.disabled {
-        background: #f1f5f9;
-        color: var(--muted);
-        cursor: not-allowed;
-      }
-      .btn {
-        padding: 14px 28px;
-        border-radius: 12px;
-        border: none;
-        background: linear-gradient(135deg, #20504e, #2b7a77);
-        color: white;
-        font-size: 16px;
-        font-weight: 600;
-        cursor: pointer;
-      }
-      .hidden {
-        display: none;
-      }
-      .center {
-        text-align: center;
-      }
-      .success {
-        color: var(--success);
-        font-weight: 600;
-      }
-      .error {
-        color: var(--danger);
-        font-size: 13px;
-      }
-    </style>
-  </head>
+    *{box-sizing:border-box;font-family:Inter,sans-serif}
+    body{margin:0;background:radial-gradient(circle at top,#1e1b4b,#020617);color:var(--text)}
+    section{padding:90px 16px}
+    .container{max-width:1200px;margin:auto}
+    h1{font-size:56px}
+    h2{font-size:36px}
+    p{color:var(--muted);line-height:1.7}
 
-  <body>
-    <div class="container">
-      <h1 class="center">Krishna Medicose</h1>
-      <p class="center">Book a pharmacy consultation for ₹99</p>
+    .btn{
+      padding:14px 32px;border-radius:999px;
+      background:linear-gradient(90deg,var(--primary),var(--secondary));
+      color:#020617;font-weight:600;border:none;cursor:pointer
+    }
 
-      <!-- BOOKING -->
-      <div class="card" id="bookingCard">
-        <div class="grid">
-          <div><label>Name</label><input id="nameInput" /></div>
-          <div><label>Email</label><input id="emailInput" type="email" /></div>
-          <div><label>Phone</label><input id="phoneInput" /></div>
-          <div><label>Purpose</label><input id="purposeInput" /></div>
-          <div><label>Source</label><input id="sourceInput" /></div>
-          <div><label>Date</label><input id="dateInput" type="date" /></div>
-        </div>
+    .card{
+      background:linear-gradient(180deg,#0f172a,#020617);
+      padding:30px;border-radius:24px;
+      box-shadow:0 20px 60px rgba(0,0,0,.6)
+    }
 
-        <div style="margin-top: 14px">
-          <label>Description</label>
-          <textarea id="descriptionInput"></textarea>
-        </div>
+    .grid{
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
+      gap:18px
+    }
 
-        <div style="margin-top: 18px">
-          <label>Select Slot</label>
-          <div class="slots" id="slots"></div>
-          <p id="slotLoader" style="font-size: 13px; color: var(--muted)"></p>
-        </div>
+    label{font-size:13px;font-weight:600;margin-bottom:6px;display:block}
+    input,textarea{
+      width:100%;padding:12px 14px;border-radius:12px;
+      border:1px solid #1f2937;background:#020617;color:white
+    }
 
-        <div class="center" style="margin-top: 24px">
-          <button class="btn" id="bookBtn">Pay & Book Slot</button>
-        </div>
+    .slots{display:flex;flex-wrap:wrap;gap:10px;margin-top:10px}
+    .slot{
+      padding:10px 14px;border-radius:999px;
+      border:1px solid #1f2937;cursor:pointer;font-size:13px
+    }
+    .slot.active{
+      background:linear-gradient(90deg,var(--primary),var(--secondary));
+      color:#020617;border:none
+    }
+    .slot.disabled{opacity:.4;cursor:not-allowed}
+
+    .hidden{display:none}
+    .center{text-align:center}
+
+    footer{
+      padding:40px;text-align:center;
+      color:var(--muted);border-top:1px solid #1f2937
+    }
+  </style>
+</head>
+
+<body>
+
+<!-- ================= BOOKING PAGE ================= -->
+<div id="page-book">
+
+<section class="center">
+  <div class="container">
+    <h1>Krishna <span style="background:linear-gradient(90deg,var(--primary),var(--secondary));-webkit-background-clip:text;-webkit-text-fill-color:transparent">Medicose</span></h1>
+    <p>Personalised pharmacy consultation for students & professionals</p>
+  </div>
+</section>
+
+<section>
+  <div class="container">
+    <div class="card">
+      <h2>Book Consultation ₹99</h2>
+
+      <div class="grid">
+        <div><label>Name</label><input id="nameInput"></div>
+        <div><label>Email</label><input id="emailInput" type="email"></div>
+        <div><label>Phone</label><input id="phoneInput"></div>
+        <div><label>Purpose</label><input id="purposeInput"></div>
+        <div><label>Source</label><input id="sourceInput"></div>
+        <div><label>Date</label><input id="dateInput" type="date"></div>
       </div>
 
-      <!-- UPI -->
-      <div class="card hidden center" id="upiCard">
-        <h2>Complete Payment</h2>
-        <p>Pay ₹99 to</p>
-        <h3 style="color: var(--primary)">9639191817@ptyes</h3>
-
-        <p style="margin-top: 20px">Enter UTR</p>
-        <input id="utrInput" />
-        <p id="utrError" class="error"></p>
-
-        <button class="btn" style="margin-top: 16px" id="confirmBtn">
-          Confirm Payment
-        </button>
+      <div style="margin-top:14px">
+        <label>Description</label>
+        <textarea id="descriptionInput"></textarea>
       </div>
 
-      <!-- SUCCESS -->
-      <div class="card hidden center" id="successCard">
-        <h2 class="success">✅ Booking Confirmed</h2>
-        <p>You will receive confirmation on email.</p>
+      <div style="margin-top:20px">
+        <label>Select Slot</label>
+        <div class="slots" id="slots"></div>
+        <p id="slotLoader"></p>
+      </div>
+
+      <div class="center" style="margin-top:30px">
+        <button class="btn" onclick="bookAppointment()">Pay & Book Slot</button>
       </div>
     </div>
+  </div>
+</section>
 
-    <script>
-      /* ========= CONFIG ========= */
-      const BASE_URL = "https://api.krishnamedicose.in";
-      let selectedSlotId = null;
-      let appointmentId = null;
+</div>
 
-      /* ========= ELEMENTS ========= */
-      const nameInput = document.getElementById("nameInput");
-      const emailInput = document.getElementById("emailInput");
-      const phoneInput = document.getElementById("phoneInput");
-      const purposeInput = document.getElementById("purposeInput");
-      const sourceInput = document.getElementById("sourceInput");
-      const descriptionInput = document.getElementById("descriptionInput");
-      const dateInput = document.getElementById("dateInput");
-      const slotsEl = document.getElementById("slots");
-      const slotLoader = document.getElementById("slotLoader");
+<!-- ================= PAYMENT PAGE ================= -->
+<div id="page-pay" class="hidden">
 
-      /* ========= INIT ========= */
-      dateInput.min = new Date().toISOString().split("T")[0];
-      dateInput.value = dateInput.min;
-      fetchSlots(dateInput.value);
-      dateInput.onchange = () => fetchSlots(dateInput.value);
+<section class="center">
+  <div class="container">
+    <div class="card">
+      <h2>Complete Payment</h2>
+      <p>Pay <b>₹99</b> to</p>
+      <h1 style="background:linear-gradient(90deg,var(--primary),var(--secondary));-webkit-background-clip:text;-webkit-text-fill-color:transparent">
+        9639191817@ptyes
+      </h1>
 
-      document.getElementById("bookBtn").onclick = bookAppointment;
-      document.getElementById("confirmBtn").onclick = confirmPayment;
+      <p id="timer" style="color:var(--danger);font-weight:600"></p>
 
-      /* ========= FUNCTIONS ========= */
-      async function fetchSlots(date) {
-        slotsEl.innerHTML = "";
-        slotLoader.innerText = "Loading slots...";
-        selectedSlotId = null;
+      <input id="utrInput" placeholder="Enter UTR">
+      <p id="utrError" style="color:var(--danger)"></p>
 
-        try {
-          const res = await fetch(
-            `${BASE_URL}/api/slots/available?date=${date}`
-          );
+      <button class="btn" onclick="confirmPayment()">Confirm Payment</button>
+    </div>
+  </div>
+</section>
 
-          const result = await res.json();
-          slotLoader.innerText = "";
+</div>
 
-          if (!result.success || !Array.isArray(result.data)) {
-            slotLoader.innerText = "No slots available";
-            return;
-          }
+<!-- ================= SUCCESS ================= -->
+<div id="page-success" class="hidden center">
+  <section>
+    <div class="container">
+      <h1 style="color:var(--success)">✅ Booking Confirmed</h1>
+      <p>You will receive confirmation on email.</p>
+    </div>
+  </section>
+</div>
 
-          const slots = result.data;
+<footer>
+  © 2026 Krishna Medicose
+</footer>
 
-          if (slots.length === 0) {
-            slotLoader.innerText = "No slots available";
-            return;
-          }
+<script>
+const BASE_URL = "https://api.krishnamedicose.in";
+let selectedSlotId=null, appointmentId=null, timerInterval=null;
 
-          slots.forEach((slot) => {
-            const div = document.createElement("div");
-            div.className = "slot";
+/* ---------- ROUTER ---------- */
+function route(){
+  const hash = location.hash;
+  document.querySelectorAll("[id^='page-']").forEach(p=>p.classList.add("hidden"));
+  if(hash==="#/pay") document.getElementById("page-pay").classList.remove("hidden");
+  else if(hash==="#/success") document.getElementById("page-success").classList.remove("hidden");
+  else document.getElementById("page-book").classList.remove("hidden");
+}
+window.addEventListener("hashchange",route);
+route();
 
-            const start = new Date(slot.startTime).toLocaleTimeString([], {
-              hour: "2-digit",
-              minute: "2-digit",
-            });
-            const end = new Date(slot.endTime).toLocaleTimeString([], {
-              hour: "2-digit",
-              minute: "2-digit",
-            });
+/* ---------- FORM ---------- */
+const dateInput=document.getElementById("dateInput");
+dateInput.min=new Date().toISOString().split("T")[0];
+dateInput.value=dateInput.min;
+fetchSlots(dateInput.value);
+dateInput.onchange=()=>fetchSlots(dateInput.value);
 
-            div.innerText = `${start} - ${end}`;
+async function fetchSlots(date){
+  const slotsEl=document.getElementById("slots");
+  slotsEl.innerHTML="Loading...";
+  const res=await fetch(`${BASE_URL}/api/slots/available?date=${date}`);
+  const data=await res.json();
+  slotsEl.innerHTML="";
+  data.data.forEach(s=>{
+    const d=document.createElement("div");
+    d.className="slot";
+    d.innerText=new Date(s.startTime).toLocaleTimeString([], {hour:'2-digit',minute:'2-digit'})+
+      " - "+new Date(s.endTime).toLocaleTimeString([], {hour:'2-digit',minute:'2-digit'});
+    if(!s.isBooked){
+      d.onclick=()=>{document.querySelectorAll(".slot").forEach(x=>x.classList.remove("active"));d.classList.add("active");selectedSlotId=s._id;}
+    } else d.classList.add("disabled");
+    slotsEl.appendChild(d);
+  });
+}
 
-            if (slot.isBooked) {
-              div.classList.add("disabled");
-            } else {
-              div.onclick = () => {
-                document
-                  .querySelectorAll(".slot")
-                  .forEach((s) => s.classList.remove("active"));
-                div.classList.add("active");
-                selectedSlotId = slot._id;
-              };
-            }
+/* ---------- BOOK ---------- */
+async function bookAppointment(){
+  if(!selectedSlotId) return alert("Select a slot");
 
-            slotsEl.appendChild(div);
-          });
-        } catch (err) {
-          console.error(err);
-          slotLoader.innerText = "Failed to load slots";
-        }
-      }
+  const payload={
+    name:nameInput.value,email:emailInput.value,phoneNumber:phoneInput.value,
+    purpose:purposeInput.value,source:sourceInput.value,
+    description:descriptionInput.value,timeSlot:selectedSlotId
+  };
 
-      async function bookAppointment() {
-        console.log("Book clicked");
+  const res=await fetch(`${BASE_URL}/api/appointments/book`,{
+    method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(payload)
+  });
+  const data=await res.json();
+  if(!data.success) return alert(data.message);
 
-        if (!selectedSlotId) {
-          alert("Select a slot");
-          return;
-        }
+  appointmentId=data.appointmentId;
+  location.hash="#/pay";
+  startTimer(120);
+}
 
-        const payload = {
-          name: nameInput.value.trim(),
-          email: emailInput.value.trim(),
-          phoneNumber: phoneInput.value.trim(),
-          purpose: purposeInput.value.trim(),
-          source: sourceInput.value.trim(),
-          description: descriptionInput.value.trim(),
-          timeSlot: selectedSlotId,
-        };
+/* ---------- TIMER ---------- */
+function startTimer(seconds){
+  clearInterval(timerInterval);
+  let remaining=seconds;
+  timerInterval=setInterval(()=>{
+    document.getElementById("timer").innerText=`Time remaining: ${remaining}s`;
+    if(--remaining<0){
+      clearInterval(timerInterval);
+      alert("Payment time expired");
+      location.hash="#/";
+    }
+  },1000);
+}
 
-        const res = await fetch(`${BASE_URL}/api/appointments/book`, {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(payload),
-        });
+/* ---------- CONFIRM ---------- */
+async function confirmPayment(){
+  const utr=document.getElementById("utrInput").value.trim();
+  if(!/^\d{10,20}$/.test(utr)) return;
 
-        const data = await res.json();
-        console.log("BOOK RESPONSE:", data);
+  const res=await fetch(`${BASE_URL}/api/appointments/${appointmentId}/confirm-upi`,{
+    method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({utr})
+  });
+  const data=await res.json();
+  if(data.success){
+    clearInterval(timerInterval);
+    location.hash="#/success";
+  }
+}
+</script>
 
-        if (!data.success) {
-          alert(data.message || "Booking failed");
-          return;
-        }
-
-        appointmentId = data.appointmentId;
-        document.getElementById("bookingCard").classList.add("hidden");
-        document.getElementById("upiCard").classList.remove("hidden");
-      }
-
-      async function confirmPayment() {
-        if (!appointmentId) {
-          alert("Invalid appointment");
-          return;
-        }
-
-        const utr = document.getElementById("utrInput").value.trim();
-        if (!/^\d{10,20}$/.test(utr)) {
-          document.getElementById("utrError").innerText = "Invalid UTR";
-          return;
-        }
-
-        const res = await fetch(
-          `${BASE_URL}/api/appointments/${appointmentId}/confirm-upi`,
-          {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ utr }),
-          }
-        );
-
-        const data = await res.json();
-        if (data.success) {
-          document.getElementById("upiCard").classList.add("hidden");
-          document.getElementById("successCard").classList.remove("hidden");
-        }
-      }
-    </script>
-  </body>
+</body>
 </html>
